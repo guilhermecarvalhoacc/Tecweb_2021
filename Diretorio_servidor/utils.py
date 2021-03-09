@@ -27,13 +27,7 @@ def load_template(path):
     return read_file(path)
 
 def build_response(body='', code=200, reason='OK', headers=''):
-    response = 'HTTP/1.1 ' + (' '.join([str(code), reason]))
-    
-    if headers == '':
-        response += '\n\n' + body
-    else:
-        response += '\n' + headers + '\n\n' + body
-
-    print('Response: ' + response)
-    
-    return response.encode()
+    resposta = f"HTTP/1.1 {code} {reason}\n\n{body}" 
+    if headers != "":
+        resposta = f"HTTP/1.1 {code} {reason}\n{headers}\n\n{body}"
+    return resposta.encode()
